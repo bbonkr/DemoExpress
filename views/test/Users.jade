@@ -1,0 +1,40 @@
+extends ../layout.jade
+
+block content
+	h1=title
+	p Welcome to #{message}
+
+	form(action='./Users', method='post')
+		.row
+			.form-group
+				label Id :
+					input(type='text', name='id',autofous, value='#{data_id}')#txtid.form-control
+				a(href='#')#btnidcheck.btn.btn-info Check
+			.form-group
+				label Name :
+					input(type='text', name='name', value='#{data_name}').form-control
+			.form-group
+				label Password : 
+					input(type='password', name='password', value='#{data_password}').form-control
+			.form-group
+				input(type='submit', value='Submit', disabled='disabled')#btnsubmit.btn.btn-primary
+				a(href='./list').btn.btn-danger Cancel
+
+	script.
+		$(document).ready(function(){
+			$('form').submit(fuction(event){
+
+			});
+
+			$('#btnidcheck').click(function(){
+				$.get('./checkid?id=' + $('#txtid').val(),function(data){
+					if(data['result']){
+						$('#btnsubmit').removeAttr('disabled');
+					}
+					else{
+						$('#btnsubmit').prop({'disabled':true});	
+					}
+				});
+			});
+		});
+		

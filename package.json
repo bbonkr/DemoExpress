@@ -1,6 +1,6 @@
 {
-  "name": "DemoExpress",
-  "version": "0.0.0",
+  "name": "firstexpress",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"

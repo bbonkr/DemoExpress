@@ -1,0 +1,85 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    /*max-width: 280px;*/
+}
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+.chart {
+    margin-bottom: 10px;
+}
+
+.center-block {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#content {
+    padding: 10px;
+}
+
+/* Card List  */
+.card {
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 10px;
+    /*margin-right: 20px;
+        margin-bottom: 20px;*/
+}
+
+.card-container {
+    padding: 10px;
+}
+
+.card .xl {
+    font-size: x-large;
+}
+
+.card .l {
+    font-size: large;
+}
+
+.card .m {
+    font-size: medium;
+}
+
+.card .s {
+    font-size: small;
+}
