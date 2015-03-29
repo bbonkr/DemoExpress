@@ -13,12 +13,27 @@ html
 		script(type='text/javascript', src='/javascripts/jquery.util.js')
 		script(type='text/javascript', src='/javascripts/jquery-ui.util.js')
 		script(type='text/javascript', src='/javascripts/jquery.datagrid.js')
+		script(type='text/javascript', src='/javascripts/bootbox.min.js')
 
 		block head
 
 	body
 		.container
-			block content
+			.row
+				h1=title
+				p Welcome to #{title}
+
+			.row
+				.col-md-2
+					ul.list-group
+						li.list-group-item
+							a(href='/')
+								div Home
+						li.list-group-item
+							a(href='/test/list')
+								div User
+				.col-md-10
+					block content
 
 
 

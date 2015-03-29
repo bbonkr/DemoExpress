@@ -1,40 +1,102 @@
 extends ../layout.jade
+- var data = data
 
 block content
-	h1=title
-	p Welcome to #{message}
+	h3=subtitle
 
-	form(action='./Users', method='post')
+	form(action='./Users', method='post', data-task=data.task)
 		.row
-			.form-group
-				label Id :
-					input(type='text', name='id',autofous, value='#{data_id}')#txtid.form-control
-				a(href='#')#btnidcheck.btn.btn-info Check
-			.form-group
-				label Name :
-					input(type='text', name='name', value='#{data_name}').form-control
-			.form-group
-				label Password : 
-					input(type='password', name='password', value='#{data_password}').form-control
-			.form-group
-				input(type='submit', value='Submit', disabled='disabled')#btnsubmit.btn.btn-primary
-				a(href='./list').btn.btn-danger Cancel
+			.col-md-6
+				.form-group
+					label(for='txtid') Id :
+					.input-group
+						input(type='text', name='id',autofocus, value='#{data.id}', readonly=data.task != 'c', data-desc='Id')#txtid.form-control.required
+						span.input-group-btn
+							a(href='#', disabled=data.task != 'c')#btnidcheck.btn.btn-default Check
+						
+				.form-group
+					label(for='txtname') Name :
+					input(type='text', name='name', value='#{data.name}', data-desc='name')#txtname.form-control.required
+				.form-group
+					label(for='txtpassword') Password : 
+					input(type='password', name='password', value='#{data.password}', data-desc='password')#txtpassword.form-control.required
+				hr
+				nav(role='navigation').navbar-left
+					ul.list-inline
+						li
+							a(href='#', disabled=data.task=='c')#btndelete.btn.btn-danger Delete
+				
+				nav(role='navigation').navbar-right
+					ul.list-inline
+						li
+							a(href='#', disabled=data.task == 'c')#btnsubmit.btn.btn-primary Submit
+						li
+							a(href='./list')#btncancel.btn.btn-success Cancel
 
 	script.
 		$(document).ready(function(){
-			$('form').submit(fuction(event){
+			$('#btnsubmit').on('click', function(){
+				var nLen = 1;
+				var strMessage = '';
 
-			});
-
-			$('#btnidcheck').click(function(){
-				$.get('./checkid?id=' + $('#txtid').val(),function(data){
-					if(data['result']){
-						$('#btnsubmit').removeAttr('disabled');
-					}
-					else{
-						$('#btnsubmit').prop({'disabled':true});	
+				$('.required').each(function(index, item){
+				 	nLen *= $(this).val().length;
+				 	if($(this).val().length == 0){
+						strMessage += '- ' + $(this).attr('data-desc') + '<br />';
 					}
 				});
+
+				if(nLen == 0){
+					strMessage = 'Please, check your input.<br />' + strMessage;
+					bootbox.alert(strMessage);
+					return false;
+				}
+
+				var action = '';
+				var task = '';
+				task = $('form').attr('data-task');
+
+				if(task == 'c'){action = './Add'}
+				else{action = './edit';}
+
+				$('form').attr({'action': action});
+				$('form').submit();
 			});
+
+			$('#btndelete').on('click', function(){
+				$('form').attr({'action' : './delete'});
+				$('form').submit();
+			});
+
+			$('#btnidcheck').on('click', function(){
+				
+				var userid = $('#txtid').val();
+				if(userid == ''){
+					bootbox.alert('Please input Id value.');
+				}
+				else{
+					$.get('./checkid?id=' + userid, function(data){
+						if(data['result']){
+							$('#btnsubmit').removeAttr('disabled');
+							$('#txtname').focus();
+						}
+						else{
+							$('#btnsubmit').prop({'disabled':true});
+							bootbox.alert('Please, try other id.');
+						}
+					});
+				}
+
+				return false;
+			});
+
+			$('#txtid').change(function(){
+				var task = '';
+				task = $('form').attr('data-task');
+				if(task == 'c'){
+					$('#btnsubmit').attr({'disabled':'disabled'});
+				}
+			});
+
 		});
 		

@@ -1,19 +1,18 @@
 extends ../layout.jade
 
 block title
-	title User List
 
 block head
 
 block content
-	h1 User List
+	h3=subtitle
 
 	.row
 		.table-responsive
 			table#datagrid.table.table-striped
 			nav#datagridpagination
 		hr
-		a(href='./users').btn.btn-default 신규입력
+		a(href='./users').btn.btn-default Add User
 
 	script.
 		$(document).ready(function(){
@@ -29,9 +28,9 @@ block content
 				'tableId': '#datagrid',
 				'paginationId': '#datagridpagination',
 				'useCustomHeader': false,
-				'usePaging': false,
+				'usePaging': true,
 				'page': 1,
-				'rows': 10,
+				'rows': 5,
 				'pageCount': 5,
 				'debug': true,
 				'afterDataBind':function(){

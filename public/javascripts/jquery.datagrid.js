@@ -277,7 +277,10 @@
                                 startPage = (Math.floor(((page - 1) / pageCount)) * pageCount) + 1;
 
                                 var paginationUL = $('<ul></ul>').addClass('pagination');
+                                var total_record_count = data['Total'];
                                 var total = data['Total'];
+                                total = Math.floor(total_record_count / rows) + ((total_record_count % rows) > 0 ? 1 : 0);
+
                                 var records = data['Records'];
                                 var previousPage = 1;
                                 var nextPage = 0;
@@ -341,7 +344,8 @@
                                            'page': gotoPage,
                                            'rows': rows,
                                            'pageCount': pageCount,
-                                           'action': DATAGRID_RELOAD
+                                           'action': DATAGRID_RELOAD,
+                                           'afterDataBind':settings['afterDataBind']
                                        });
                                 });
                             } /* end if(usePaging) */
@@ -425,7 +429,8 @@
                                    'pageCount': pageCount,
                                    'sidx': sidx,
                                    'sord': sord,
-                                   'action': DATAGRID_SORT
+                                   'action': DATAGRID_SORT,
+                                   'afterDataBind':settings['afterDataBind']
                                });
                     });
                 }
