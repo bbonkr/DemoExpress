@@ -186,7 +186,17 @@ router.get('/json', function(req, res, next){
 
 	var start_idx = (p_page - 1) * p_rows;
 
-	queryString += 'select id, name, \'******\' password from Users limit '+ start_idx + ',' + p_rows;
+	queryString += 'select id, name, \'******\' password from Users ';
+	
+	if (p_sidx){
+		queryString += 'order by ' + p_sidx;
+		if(!p_sord){
+			p_sord = 'asc';
+		}
+		queryString += ' ' + p_sord;
+	}
+
+	queryString +=' limit '+ start_idx + ',' + p_rows;
 	queryString2 += 'select count(*) total from Users';
 	
 	connection.query(queryString, function(err1, result1){

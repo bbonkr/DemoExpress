@@ -21,9 +21,9 @@ block content
 			$('#datagrid').datagrid({
 				'url' : url,
 				'columns' : [
-					{'name':'id', 'header' : 'ID', width:0},
-					{'name':'name', 'header' : 'Name', width:0},
-					{'name':'password', 'header' : 'Password', width:0}
+					{'name':'id', 'header' : 'ID', width:0, 'sortable':true},
+					{'name':'name', 'header' : 'Name', width:0, 'sortable':true},
+					{'name':'password', 'header' : 'Password', width:0, 'sortable':true}
 				],
 				'tableId': '#datagrid',
 				'paginationId': '#datagridpagination',
